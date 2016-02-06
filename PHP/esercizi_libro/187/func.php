@@ -14,14 +14,14 @@
              }
     }
     if (count($divisori) == 1) {
-        echo "Numero primo";
+        echo "        <p>Numero primo</p>\n";
     } else {
         array_shift($divisori);
-        echo "<ul>\n";
+        echo "        <ul>\n";
         foreach ($divisori as $divisore) {
-            echo "<li>$divisore</li>\n";
+            echo "            <li>$divisore</li>\n";
         }
-        echo "</ul>\n";
+        echo "        </ul>\n";
     }
          
 ?>
