@@ -16,6 +16,7 @@
     if (count($divisori) == 1) {
         echo "Numero primo";
     } else {
+        array_shift($divisori);
         echo "<ul>\n";
         foreach ($divisori as $divisore) {
             echo "<li>$divisore</li>\n";
