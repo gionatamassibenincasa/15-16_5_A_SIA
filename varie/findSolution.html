@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+   <title>Gioco</title>
+   <script>
+     
+function findSolution(n) {
+  if (n < 1)
+    return false;
+  if (n == 1)
+    return true;
+  var res = false;
+  if (n > 5)
+    res = findSolution(n - 5);
+  if (res)
+    return true;
+  if (n % 3 == 0)
+    res = findSolution(n / 3);
+  return res;
+}
+   
+   </script>
+  </head>
+   <body>
+     
+     <h2>Assioma</h2>
+     
+     <p>1 appartiene all'insieme <em>G</em>.</p>
+     
+     <h2>Regola 1</h2>
+     
+     <p><em>g</em> + 5 appartiene all'insieme <em>G</em>
+     se <em>g</em> appartiene a <em>G</em>.</p>
+     
+     <h2>Regola 2</h2>
+     
+     <p><em>g</em> x 3 appartiene all'insieme <em>G</em>
+     se <em>g</em> appartiene a <em>G</em>.</p>
+     
+     <script>
+var n = Number(prompt("Dimmi un numero"));
+var msg;
+if (findSolution(n))
+  msg = "Il numero appartiene all'insieme G";
+else
+  msg = "Il numero NON appartiene all'insieme G";
+alert(msg);
+  </script>
+   </body>
+</html>
