@@ -89,5 +89,5 @@ vendita (
     dipendente INT REFERENCES
         dipendente(codice),
     data DATE NOT NULL,
-    prezzo DECIMAL(7,5)
+    prezzo DECIMAL(7,2)
 );
