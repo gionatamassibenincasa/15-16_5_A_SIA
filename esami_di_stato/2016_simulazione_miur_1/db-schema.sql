@@ -29,17 +29,55 @@ modello(
         REFERENCES collezione(codice)
 );
 
--- CREATE TABLE IF NOT EXISTS
--- dipendente(codice_fiscale, nome, cognome)
+CREATE TABLE IF NOT EXISTS
+dipendente(
+    codice INT PRIMARY KEY,
+    -- codice_fiscale non e' utilizzabile
+    -- in quanto occorre un codice per
+    -- identifica un cittadino europeo
+    -- e non solo italiano
+    nome VARCHAR(255) NOT NULL,
+    cognome VARCHAR(255) NOT NULL
+);
 
--- CREATE TABLE IF NOT EXISTS
--- negozio(codice, denominazione, apertura, telefono)
+CREATE TABLE IF NOT EXISTS
+negozio(
+    codice INT PRIMARY KEY,
+    denominazione VARCHAR(255),
+    apertura DATE,
+    telefono VARCHAR(15)
+);
 
--- CREATE TABLE IF NOT EXISTS
--- indirizzo(negozio, nazione, località, cap, via)
+CREATE TABLE IF NOT EXISTS
+indirizzo(
+    negozio INT PRIMARY KEY
+        REFERENCES negozio(codice),
+    nazione ENUM('Italia', 'Francia', 'Spagna'),
+    localita VARCHAR(255),
+    cap VARCHAR(7),
+    via VARCHAR(255)
+);
 
--- CREATE TABLE IF NOT EXISTS
--- lavora(dipendente, negozio, inizio, fine, qualifica)
+CREATE TABLE IF NOT EXISTS
+lavora(
+    dipendente INT REFERENCES
+        dipendente(codice),
+    negozio INT REFERENCES
+        negozio(codice),
+    inizio DATE,
+    fine DATE NULL,
+    qualifica ENUM('commesso', 'direttore'),
+    PRIMARY KEY(dipendente, negozio, inizio)
+);
 
--- CREATE TABLE IF NOT EXISTS
--- abito(codice, taglia, colore, modello, negozio)
+CREATE TABLE IF NOT EXISTS
+abito(
+    codice INT PRIMARY KEY,
+    taglia INT CHECK(taglia BETWEEN 38 AND 58),
+    colore INT REFERENCES
+        colore(codice),
+    modello INT REFERENCES
+        modello(codice),
+    negozio INT NULL REFERENCES
+        negozio(codice)
+);
