@@ -4,7 +4,7 @@ sim1_es_stato_2016_miur;
 USE sim1_es_stato_2016_miur;
 
 CREATE TABLE IF NOT EXISTS
-collezione(
+collezione (
     codice INT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     stagione VARCHAR(255) NOT NULL,
@@ -13,14 +13,14 @@ collezione(
 );
 
 CREATE TABLE IF NOT EXISTS
-colore(
+colore (
     codice INT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     tessuto VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS
-modello(
+modello (
     codice INT PRIMARY KEY,
     prezzo DECIMAL(7,2) NOT NULL, -- ddddd.dd
     nome VARCHAR(255) NOT NULL,
@@ -30,7 +30,7 @@ modello(
 );
 
 CREATE TABLE IF NOT EXISTS
-dipendente(
+dipendente (
     codice INT PRIMARY KEY,
     -- codice_fiscale non e' utilizzabile
     -- in quanto occorre un codice per
@@ -41,7 +41,7 @@ dipendente(
 );
 
 CREATE TABLE IF NOT EXISTS
-negozio(
+negozio (
     codice INT PRIMARY KEY,
     denominazione VARCHAR(255),
     apertura DATE,
@@ -49,7 +49,7 @@ negozio(
 );
 
 CREATE TABLE IF NOT EXISTS
-indirizzo(
+indirizzo (
     negozio INT PRIMARY KEY
         REFERENCES negozio(codice),
     nazione ENUM('Italia', 'Francia', 'Spagna'),
@@ -59,7 +59,7 @@ indirizzo(
 );
 
 CREATE TABLE IF NOT EXISTS
-lavora(
+lavora (
     dipendente INT REFERENCES
         dipendente(codice),
     negozio INT REFERENCES
@@ -71,7 +71,7 @@ lavora(
 );
 
 CREATE TABLE IF NOT EXISTS
-abito(
+abito (
     codice INT PRIMARY KEY,
     taglia INT CHECK(taglia BETWEEN 38 AND 58),
     colore INT REFERENCES
@@ -80,4 +80,14 @@ abito(
         modello(codice),
     negozio INT NULL REFERENCES
         negozio(codice)
+);
+
+CREATE TABLE  IF NOT EXISTS
+vendita (
+    abito INT PRIMARY KEY
+        REFERENCES abito(codice),
+    dipendente INT REFERENCES
+        dipendente(codice),
+    data DATE NOT NULL,
+    prezzo DECIMAL(7,5)
 );
