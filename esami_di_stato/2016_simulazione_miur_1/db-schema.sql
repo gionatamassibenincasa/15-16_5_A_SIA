@@ -77,12 +77,21 @@ abito (
     colore INT REFERENCES
         colore(codice),
     modello INT REFERENCES
-        modello(codice),
-    negozio INT NULL REFERENCES
-        negozio(codice)
+        modello(codice)
 );
 
-CREATE TABLE  IF NOT EXISTS
+CREATE TABLE IF NOT EXISTS
+esposizione (
+    abito INT REFERENCES
+        abito(codice),
+    negozio INT REFERENCES
+        negozio(codice),
+    arrivo DATE NOT NULL,
+    partenza DATE NULL DEFAULT NULL,
+    PRIMARY KEY(abito, negozio, arrivo)
+);
+
+CREATE TABLE IF NOT EXISTS
 vendita (
     abito INT PRIMARY KEY
         REFERENCES abito(codice),
