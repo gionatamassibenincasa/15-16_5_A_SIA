@@ -27,7 +27,7 @@ paziente (
   cognome VARCHAR(50)
 );
 
-DROP TABLE IF EXISTS orario;
+DROP TABLE IF EXISTS fascia_oraria;
 
 CREATE TABLE IF NOT EXISTS
 fascia_oraria (
@@ -64,14 +64,17 @@ DROP TABLE IF EXISTS prestazione;
 
 CREATE TABLE IF NOT EXISTS
 prestazione (
+    id INTEGER PRIMARY KEY,
     medico CHAR(16) REFERENCES medico(cf),
     paziente CHAR(16) REFERENCES paziente(cf),
+    tipo_prestazione INTEGER REFERENCES tipo_prestazione(id),
     data DATE,
     ora_prenotazione TIME,
     ora_inizio TIME,
     ora_fine TIME DEFAULT NULL,
     costo REAL,
-    effettuato BIT
+    effettuato BIT,
+    UNIQUE (medico, paziente, tipo_prestazione, data)
 );
 
 
