@@ -5,7 +5,7 @@
         <title>Elenco dei medici</title>
     </head>
     <body>
-        <h1>Medici</h1>
+        <h1>Medici specialisti</h1>
         
         <ul>
 <?php
@@ -25,7 +25,7 @@ $query = "SELECT specializzazione " .
 $specializzazioni = mysqli_query($conn, $query);
 
 while ($row_sp = mysqli_fetch_assoc($specializzazioni)) {
-    echo "<h2>" . $row_sp['specializzazione'] . "</h2>\n";
+    echo "<h2>Specializzazione: medico " . $row_sp['specializzazione'] . "</h2>\n";
     
     echo "<ul>\n";
     
@@ -44,6 +44,8 @@ while ($row_sp = mysqli_fetch_assoc($specializzazioni)) {
         echo '<li><a href="orario.php?cf=' . $cf . '">'
         . $cognome . " " . $nome . "</a></li>";
     }
+    
+    mysqli_free_result($medici);
     
     echo "</ul>\n";
 }
